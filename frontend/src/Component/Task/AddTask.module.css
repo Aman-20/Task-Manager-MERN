@@ -1,0 +1,79 @@
+@import "../../vars.css";
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    margin-top: 50px;
+}
+
+.container{
+    width: 50%;
+ 
+    margin: 10px 5px 10px 5px ;
+    padding: 10px;
+
+    background-color: #f2f2f220;
+    color: black;
+
+    border-radius: 10px;
+    box-shadow: 2px 4px 5px black, -2px -4px 5px black;
+}
+
+label{
+    font-weight: 600;
+    display: block;
+    color: white;
+    margin: 8px;
+}
+
+h1{
+    text-align: center;
+    color: white;
+    margin-bottom: 5px;
+}
+
+input, textarea{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;   
+
+    background-color: rgba(245, 245, 245, 0.850);
+}
+
+input:hover, textarea:hover{
+    border: 2px solid #ccc;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit{
+    width: 50%;
+    padding: 12px;
+
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+
+    border: none;
+    border-radius: 15px;
+
+    cursor: pointer;
+    font-size: 1.2rem;
+
+    font-weight: bold;
+}
+
+.submit:hover{
+    border: 1px solid;
+}
+

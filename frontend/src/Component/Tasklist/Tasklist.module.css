@@ -1,0 +1,73 @@
+@import "../../vars.css";
+
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 15px;
+}
+
+.container h1{
+    color: white;
+}
+
+.container table {
+    width: 100%;
+    /* border-collapse: collapse; */
+}
+
+.container th, .container td {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.container th {
+    background-color: #f2f2f257;
+}
+
+.container td{
+    background-color: #f2f2f220;
+}
+
+.btns{
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    justify-content: center;
+    align-items: center;
+    height: 100%
+}
+
+.delete, .deleteAll {
+    background-color: rgba(255, 0, 0, 0.9);
+
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    padding: 6px 0px;
+    margin: 3px;
+}
+
+.deleteAll{
+    max-width: 5rem;
+}
+
+.update{
+    background-color: rgba(0, 128, 0, 0.9);
+
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    padding: 6px 0px;
+    text-decoration: none;
+    margin: 3px;
+    text-align: center;
+}
