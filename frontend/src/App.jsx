@@ -5,6 +5,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AddTask from './Component/Task/AddTask';
 import Tasklist from './Component/Tasklist/Tasklist';
 import UpdateTask from './Component/UpdateTask/UpdateTask';
+import Login from './Component/Register/Login';
+import Signup from './Component/Register/Signup';
+
+import ProtectedRoute from "./Component/ProtectedRoute";
+import RedirectIfAuth from "./Component/RedirectIfAuth";
+
 
 const App = () => {
   return (
@@ -13,9 +19,13 @@ const App = () => {
         <Navbar />
 
         <Routes>
-          <Route path='/' element={ <Tasklist/> } />
-          <Route path='/add' element={ <AddTask/> } />
-          <Route path='/update/:id' element={ <UpdateTask/> } />
+          <Route path='/' element={ <ProtectedRoute> <Tasklist/> </ProtectedRoute> } />
+          <Route path='/add' element={<ProtectedRoute> <AddTask/> </ProtectedRoute> } />
+          <Route path='/update/:id' element={ <ProtectedRoute> <UpdateTask/> </ProtectedRoute> } />
+          <Route path='/login' element={ <RedirectIfAuth> <Login/> </RedirectIfAuth>} />
+          <Route path='/signup' element={ <RedirectIfAuth> <Signup/> </RedirectIfAuth> } />
+
+          <Route path="*" element={<h1>Page Not Available</h1>} />
         </Routes>
 
       </Router>

@@ -1,12 +1,19 @@
 const express = require("express");
-const {User} = require("../model/user");
-
 const router = express.Router();
 
-router.get("/",(req, res)=>{
-    res.send("this is user router");
+const {handleUserLogin, handleUserSignup, handleUserLogout} = require("../controller/user");
+const {checkAuth} = require("../middleware/checkAuth");
+
+
+router.get("/me", checkAuth, (req, res) => {
+    res.json({success:true, user:req.user});
 });
 
+router.post("/signup", handleUserSignup);
+
+router.post("/login", handleUserLogin);
+
+router.get("/logout", handleUserLogout);
 
 
 module.exports = router;
