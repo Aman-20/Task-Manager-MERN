@@ -27,7 +27,7 @@ const Navbar = () => {
             <>
             <li><Link to="/">List</Link></li>
             <li><Link to="/add">Add task</Link></li>
-            <li><button onClick={handleLogout}>Logout</button></li>
+            <li><button onClick={handleLogout} className={styles.btn}>Logout</button></li>
             </>
           ) : (
             <>

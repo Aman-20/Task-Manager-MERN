@@ -8,6 +8,17 @@
     color: white;
 }
 
-h1{
+.notFound{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-top: 50px;
+    gap: 20px;
+
+    font-size: 2rem;
+}
+.link{
+    color: rgba(0, 132, 255, 0.685);
+    font-size: 1.5rem;
 }

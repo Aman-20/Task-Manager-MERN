@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./App.module.css";
 import Navbar from './Component/Navbar/Navbar'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AddTask from './Component/Task/AddTask';
 import Tasklist from './Component/Tasklist/Tasklist';
 import UpdateTask from './Component/UpdateTask/UpdateTask';
@@ -25,7 +25,7 @@ const App = () => {
           <Route path='/login' element={ <RedirectIfAuth> <Login/> </RedirectIfAuth>} />
           <Route path='/signup' element={ <RedirectIfAuth> <Signup/> </RedirectIfAuth> } />
 
-          <Route path="*" element={<h1>Page Not Available</h1>} />
+          <Route path="*" element={<div className={styles.notFound}> Page Not Available! <Link className={styles.link} to="/">Back to home</Link> </div>} />
         </Routes>
 
       </Router>
