@@ -24,12 +24,13 @@ mongoConnect(process.env.MONGO_URL);
 //middleware
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public" )));
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:process.env.FRONTEND_URL,
     credentials:true
 }));
-app.use(cookieParser());
+
 
 
 app.use("/", userRouter);
@@ -37,5 +38,5 @@ app.use("/task", checkAuth, taskRouter);
 
 
 app.listen(PORT, ()=>{
-    console.log("express running...")
+    console.log(`express running on port ${PORT}...`)
 })

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from "./AddTask.module.css";
 import {useNavigate} from 'react-router-dom';
+import {API_URL} from "../../config";
 
 const AddTask = () => {
 
@@ -19,7 +20,7 @@ const AddTask = () => {
     e.preventDefault();
     console.log(data);
 
-    let result = await fetch("http://localhost:3000/task/add", {
+    let result = await fetch(`${API_URL}/task/add`, {
       method:"Post",
       body:JSON.stringify(data),
       headers:{

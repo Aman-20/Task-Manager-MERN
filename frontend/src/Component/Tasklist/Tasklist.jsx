@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./Tasklist.module.css";
 import {Link} from 'react-router-dom';
+import {API_URL} from "../../config";
 
 const Tasklist = () => {
 
@@ -9,7 +10,7 @@ const Tasklist = () => {
 
 
     const getTaskList = async () => {
-        const list = await fetch("http://localhost:3000/task", {
+        const list = await fetch(`${API_URL}/task`, {
             credentials:"include",
         });
         const listData = await list.json();
@@ -28,7 +29,7 @@ const Tasklist = () => {
 
 
     const deleteTask = async(id) => {
-        const result = await fetch(`http://localhost:3000/task/delete/${id}`, { 
+        const result = await fetch(`${API_URL}/task/delete/${id}`, { 
             method:"DELETE",
             credentials:"include",
         });
@@ -65,7 +66,7 @@ const Tasklist = () => {
 
     const deleteSelected = async() =>{
         try{
-            const result = await fetch("http://localhost:3000/task/delete-multiple", {
+            const result = await fetch(`${API_URL}/task/delete-multiple`, {
                 method:"DELETE",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({ids:selectTask}),

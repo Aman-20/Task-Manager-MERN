@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import {AuthContext} from "./AuthContext";
+import {API_URL} from "../../config";
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
@@ -7,7 +8,7 @@ const AuthProvider = ({children}) => {
 
     async function fetchAuth() {
         try{
-            const result = await fetch("http://localhost:3000/me", {
+            const result = await fetch(`${API_URL}/me`, {
                 credentials:"include"
             });
             const data = await result.json();

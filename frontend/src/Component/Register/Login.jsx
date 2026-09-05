@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import styles from "../Task/AddTask.module.css"
 import { Link, useNavigate } from "react-router-dom";
 
-import {useAuth} from "../Context/AuthContext"
+import {useAuth} from "../Context/AuthContext";
+import {API_URL} from "../../config";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Login = () => {
         e.preventDefault();
         console.log(data);
 
-        const register = await fetch("http://localhost:3000/login", {
+        const register = await fetch(`${API_URL}/login`, {
             method:"POST",
             headers:{"Content-Type":"Application/Json"},
             body:JSON.stringify(data),

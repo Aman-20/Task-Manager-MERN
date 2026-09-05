@@ -2,13 +2,14 @@ import React from 'react'
 import {Link, useNavigate} from "react-router-dom";
 import styles from "./Navbar.module.css";
 import {useAuth} from "../Context/AuthContext";
+import {API_URL} from "../../config";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const {user, setUser, loading} = useAuth();
 
   const handleLogout = async(req, res)=>{
-    await fetch("http://localhost:3000/logout", {
+    await fetch(`${API_URL}/logout`, {
       credentials:"include",
     });
     setUser(null);

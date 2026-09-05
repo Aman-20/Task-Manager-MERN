@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from "../Task/AddTask.module.css"
+import styles from "../Task/AddTask.module.css";
+import {API_URL} from "../../config";
 
 
 const UpdateTask = () => {
@@ -18,7 +19,7 @@ const UpdateTask = () => {
     };
 
     const fetchData = async(e) =>{
-        const result = await fetch(`http://localhost:3000/task/${id}`, {
+        const result = await fetch(`${API_URL}/task/${id}`, {
             credentials:"include",
         });
         const data = await result.json();
@@ -40,7 +41,7 @@ const UpdateTask = () => {
 
     const handleUpdate = async(e) =>{
         e.preventDefault();
-        const update = await fetch(`http://localhost:3000/task/update/${id}`, {
+        const update = await fetch(`${API_URL}/task/update/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formdata),

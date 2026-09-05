@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "../Task/AddTask.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import {API_URL} from "../../config";
 
 
 const Signup = () => {
@@ -20,7 +21,7 @@ const Signup = () => {
         e.preventDefault();
         console.log(data);
 
-        const register = await fetch("http://localhost:3000/signup", {
+        const register = await fetch(`${API_URL}/signup`, {
             method:"POST",
             headers:{"Content-Type":"Application/Json"},
             body:JSON.stringify(data),

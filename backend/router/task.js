@@ -51,7 +51,7 @@ router.get("/:id", async (req, res) => {
 
 router.put("/update/:id", async (req, res) => {
     try {
-        const taskitem = await Task.findOneAndUpdate({_id:req.params.id, createdBy:req.user._id}, req.body, { new: true });
+        const taskitem = await Task.findOneAndUpdate({_id:req.params.id, createdBy:req.user._id}, req.body, { returnDocument: 'after' });
         res.json({ success: true, taskitem });
     } catch (err) {
         res.json({ success: false, message: err.message });
