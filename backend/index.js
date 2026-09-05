@@ -15,6 +15,9 @@ PORT = process.env.PORT || 3000;
 const userRouter = require("./router/user");
 const taskRouter = require("./router/task");
 
+//middleware
+const {checkAuth} = require("./middleware/checkAuth");
+
 //mongoDB
 mongoConnect(process.env.MONGO_URL);
 
@@ -30,7 +33,7 @@ app.use(cookieParser());
 
 
 app.use("/", userRouter);
-app.use("/task", taskRouter);
+app.use("/task", checkAuth, taskRouter);
 
 
 app.listen(PORT, ()=>{

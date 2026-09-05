@@ -18,7 +18,9 @@ const UpdateTask = () => {
     };
 
     const fetchData = async(e) =>{
-        const result = await fetch(`http://localhost:3000/task/${id}`);
+        const result = await fetch(`http://localhost:3000/task/${id}`, {
+            credentials:"include",
+        });
         const data = await result.json();
         console.log(data);
 
@@ -42,6 +44,7 @@ const UpdateTask = () => {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(formdata),
+            credentials:"include",
         });
 
         const data = await update.json();

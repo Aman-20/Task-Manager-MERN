@@ -13,7 +13,7 @@ router.post("/signup", handleUserSignup);
 
 router.post("/login", handleUserLogin);
 
-router.get("/logout", handleUserLogout);
+router.get("/logout", checkAuth, handleUserLogout);
 
 
 module.exports = router;

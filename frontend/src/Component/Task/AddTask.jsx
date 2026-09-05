@@ -24,7 +24,8 @@ const AddTask = () => {
       body:JSON.stringify(data),
       headers:{
         "Content-Type" : "Application/Json",
-      }
+      },
+      credentials:"include",
     });
 
     const resultData = await result.json();

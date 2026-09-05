@@ -9,7 +9,9 @@ const Tasklist = () => {
 
 
     const getTaskList = async () => {
-        const list = await fetch("http://localhost:3000/task");
+        const list = await fetch("http://localhost:3000/task", {
+            credentials:"include",
+        });
         const listData = await list.json();
 
         console.log(listData);
@@ -26,7 +28,10 @@ const Tasklist = () => {
 
 
     const deleteTask = async(id) => {
-        const result = await fetch(`http://localhost:3000/task/delete/${id}`, { method:"DELETE"});
+        const result = await fetch(`http://localhost:3000/task/delete/${id}`, { 
+            method:"DELETE",
+            credentials:"include",
+        });
         const task = await result.json();
 
         if(task.success){
@@ -64,6 +69,7 @@ const Tasklist = () => {
                 method:"DELETE",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify({ids:selectTask}),
+                credentials:"include",
             });
             const response = await result.json();
             if(response.success){
