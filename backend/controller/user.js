@@ -40,8 +40,8 @@ async function handleUserLogin(req, res) {
         res.cookie("token", token, {
             maxAge:60*60*1000,
             httpOnly:true,
-            secure:false,
-            sameSite:"lax",
+            secure:true, //for local development use "false"
+            sameSite:"none", //for local use "lax"
         });
 
         res.json({ success: true, message: "user verified", token, user });
