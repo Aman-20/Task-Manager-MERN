@@ -54,7 +54,12 @@ async function handleUserLogin(req, res) {
 
 async function handleUserLogout(req, res) {
     try {
-        res.clearCookie("token");
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+            path: "/", // must match the path used in res.cookie, default is "/"
+        });
         res.json({ success: true, message: "cookie cleared" });
     } catch (err) {
         res.json({ success: false, message: "unbale to delete cookie", err: err.message });
