@@ -59,7 +59,7 @@ async function updateTaskById(req, res) {
 async function deleteMultipleTask(req, res) {
     try{
         const {ids} = req.body;
-        if(!ids || ids.lenght === 0){
+        if(!ids || ids.length === 0){
             return res.json({success:false, message:"no id provided"});
         }
 

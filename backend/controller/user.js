@@ -46,7 +46,7 @@ async function handleUserLogin(req, res) {
 
         res.json({ success: true, message: "user verified", token, user });
 
-    } catch{
+    } catch (err){
         res.json({ success: false, message: "user can not be verified", err:err.message });
     }
 }
