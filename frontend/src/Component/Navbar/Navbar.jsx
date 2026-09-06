@@ -6,7 +6,7 @@ import {API_URL} from "../../config";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const {user, setUser, loading} = useAuth();
+  const {user, setUser} = useAuth();
 
   const handleLogout = async(req, res)=>{
     try{
@@ -23,9 +23,6 @@ const Navbar = () => {
     }
   }
 
-  if(loading) {
-    return <h1>Loading...</h1>
-  }
 
   return (
     <nav className={styles.navbar}>

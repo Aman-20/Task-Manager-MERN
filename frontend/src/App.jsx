@@ -11,8 +11,14 @@ import Signup from './Component/Register/Signup';
 import ProtectedRoute from "./Component/ProtectedRoute";
 import RedirectIfAuth from "./Component/RedirectIfAuth";
 
+import {useAuth} from "./Component/Context/AuthContext";
 
 const App = () => {
+  const {loading} = useAuth();
+  if(loading) {
+    return <h1>Loading...</h1>
+  }
+
   return (
     <div className={styles.App}>
       <Router>
