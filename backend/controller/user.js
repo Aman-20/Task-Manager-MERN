@@ -7,6 +7,11 @@ async function handleUserSignup(req, res) {
     try {
         const { name, email, pass } = req.body;
 
+        const checkUser = await User.findOne({email});
+        if(checkUser){
+            return res.status(409).json({success:false, message:"user already exists"});
+        }
+
         const hash = await createHashPass(pass);
         const result = await User.create({
             name,
@@ -14,10 +19,11 @@ async function handleUserSignup(req, res) {
             pass: hash,
         });
 
-        res.json({ success: true, message: "user created successfully!", result });
+        return res.status(201).json({ success: true, message: "user created successfully", result });
 
     } catch (err) {
-        res.json({ success: false, message: err.message });
+        console.log(err);
+        return res.status(500).json({ success: false, message: "unable to create user" });
     }
 }
 
@@ -28,12 +34,12 @@ async function handleUserLogin(req, res) {
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.json({ success: false, message: "no user found with this email!" });
+            return res.status(401).json({ success: false, message: "no user found with this email!" });
         }
 
         const verifyPass = await checkHashPass(pass, user.pass);
         if (!verifyPass) {
-            return res.json({ success: false, message: "wrong password" });
+            return res.status(401).json({ success: false, message: "wrong password" });
         }
 
         const token = setUser(user);
@@ -44,10 +50,11 @@ async function handleUserLogin(req, res) {
             sameSite:"none", //for local use "lax"
         });
 
-        res.json({ success: true, message: "user verified", token, user });
+        return res.status(200).json({ success: true, message: "user verified", token, user });
 
     } catch (err){
-        res.json({ success: false, message: "user can not be verified", err:err.message });
+        console.log(err);
+        return res.status(401).json({ success: false, message: "user can not be verified"});
     }
 }
 
@@ -60,9 +67,9 @@ async function handleUserLogout(req, res) {
             sameSite: "none",
             path: "/", // must match the path used in res.cookie, default is "/"
         });
-        res.json({ success: true, message: "cookie cleared" });
+        return res.status(200).json({ success: true, message: "cookie cleared" });
     } catch (err) {
-        res.json({ success: false, message: "unbale to delete cookie", err: err.message });
+        return res.status(500).json({ success: false, message: "unbale to delete cookie" });
     }
 }
 

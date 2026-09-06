@@ -4,9 +4,11 @@ const { Task } = require("../model/task");
 async function getUserTask(req, res) {
     try {
         const tasks = await Task.find({createdBy:req.user._id});
-        res.json({ success: true, tasks });
+        return res.status(200).json({ success: true, message:"Task List fetched successfully!", tasks });
+
     } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
+        console.log(err);
+        return res.status(500).json({ success: false, message: "unable to get Task List from mongoDB" });
     }
 }
 
@@ -19,19 +21,23 @@ async function addUserTask(req, res) {
             desc,
             createdBy:req.user._id,
         });
-        res.json({ success: true, taskData });
+        return res.status(201).json({ success: true, message:"Task Created Successfully!", taskData });
+
     } catch (err){
-        res.json({success:false, message:err.message});
+        console.log(err);
+        return res.status(400).json({success:false, message:"Unable to create task!"});
     }
 }
 
 
 async function deleteUserTask(req, res){
     try{
-        const taskitem = await Task.findOneAndDelete({_id:req.params.id, createdBy:req.user._id});
-        res.json({ success: true, taskitem });
+        await Task.findOneAndDelete({_id:req.params.id, createdBy:req.user._id});
+        return res.status(200).json({ success: true, message:"Task deleted successfully!" });
+
     } catch(err){
-        res.json({ success: false, message: err.message })
+        console.log(err);
+        return res.status(404).json({ success: false, message: "Task not deleted" });
     }
 }
 
@@ -39,9 +45,11 @@ async function deleteUserTask(req, res){
 async function getTaskById(req, res) {
     try {
         const taskitem = await Task.findOne({_id:req.params.id, createdBy:req.user._id});
-        res.json({ success: true, taskitem });
+        return res.status(200).json({ success: true, message:"Selected Task fetched successfully", taskitem });
+
     } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
+        console.log(err);
+        return res.status(404).json({ success: false, message: "unable to fetch selected task" });
     }
 }
 
@@ -49,9 +57,11 @@ async function getTaskById(req, res) {
 async function updateTaskById(req, res) {
     try {
         const taskitem = await Task.findOneAndUpdate({_id:req.params.id, createdBy:req.user._id}, req.body, { returnDocument: 'after' });
-        res.json({ success: true, taskitem });
+        return res.status(200).json({ success: true, message:"Task Updated Successfully" ,taskitem });
+        
     } catch (err) {
-        res.json({ success: false, message: err.message });
+        console.log(err);
+        return res.status(404).json({ success: false, message: "Unable to Update Task" });
     }
 }
 
@@ -60,14 +70,15 @@ async function deleteMultipleTask(req, res) {
     try{
         const {ids} = req.body;
         if(!ids || ids.length === 0){
-            return res.json({success:false, message:"no id provided"});
+            return res.status(400).json({success:false, message:"no task id provided"});
         }
 
-        const result = await Task.deleteMany({_id: {$in: ids}, createdBy:req.user._id});
-        res.json({success:true, result});
+        await Task.deleteMany({_id: {$in: ids}, createdBy:req.user._id});
+        return res.status(200).json({success:true, message:"selected task is deleted"});
 
     } catch(err){
-        res.json({success:false, message:err.message});
+        console.log(err);
+        return res.status(400).json({success:false, message:"unable to delete selected task"});
     }
 }
 

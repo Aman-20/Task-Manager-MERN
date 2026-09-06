@@ -1,21 +1,19 @@
-const {getUser} = require("../service/jwt");
+const { getUser } = require("../service/jwt");
 
-function checkAuth(req, res, next){
+function checkAuth(req, res, next) {
+    
     const token = req.cookies.token;
-
-    if(!token){
-        return res.json({message:"unauthorized"});
+    if (!token) {
+        return res.status(401).json({ message: "Unauthorized: no token provided" });
     }
 
-    try{
-        const userInfo = getUser(token);
-        req.user = userInfo;
-        next();
-        
-    } catch(err){
-        return res.json({message:"invailed Token"});
+    const userInfo = getUser(token);
+    if(!userInfo){
+        return res.status(401).json({ success: false, message: "Unauthorized: invalid or expired token" });
     }
 
+    req.user = userInfo;
+    return next();
 }
 
-module.exports = {checkAuth};
+module.exports = { checkAuth };

@@ -5,6 +5,8 @@ import {API_URL} from "../../config";
 
 
 const UpdateTask = () => {
+    const [error, setError] = useState("");
+    const [info, setInfo] = useState("");
 
     const {id} = useParams();
     const navigate = useNavigate();
@@ -23,13 +25,16 @@ const UpdateTask = () => {
             credentials:"include",
         });
         const data = await result.json();
-        console.log(data);
 
         if(data.success){
             setformdata({
                 title:data.taskitem.title,
                 desc:data.taskitem.desc,
             });
+            setInfo(data.message || "Selected Task fetched successfully");
+
+        } else {
+            setError( data.message || "unable to fetch selected task");
         }
 
     };
@@ -41,6 +46,7 @@ const UpdateTask = () => {
 
     const handleUpdate = async(e) =>{
         e.preventDefault();
+        
         const update = await fetch(`${API_URL}/task/update/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -51,10 +57,10 @@ const UpdateTask = () => {
         const data = await update.json();
 
         if (data.success) {
-            console.log("task updated successfully");
+            setInfo( data.message || "Task Updated Successfully")
             navigate("/"); 
         } else {
-            console.log("update failed");
+            setError( data.message || "Unable to Update Task")
         }
     }
     
@@ -64,6 +70,9 @@ const UpdateTask = () => {
             <div className={styles.container} >
 
                 <h1>Update Task</h1>
+
+                {error && <p>{error}</p>}
+                {info && <p>{info}</p>}
 
                 <form className={styles.data} onSubmit={handleUpdate}>
 

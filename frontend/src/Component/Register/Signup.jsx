@@ -5,6 +5,9 @@ import {API_URL} from "../../config";
 
 
 const Signup = () => {
+    const [error, setError] = useState("");
+    const [info, setInfo] = useState("");
+
     const navigate = useNavigate();
 
     const [data, setdata] = useState({
@@ -19,7 +22,6 @@ const Signup = () => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log(data);
 
         const register = await fetch(`${API_URL}/signup`, {
             method:"POST",
@@ -30,10 +32,14 @@ const Signup = () => {
         const result = await register.json();
 
         if(result.success){
-            console.log(result);
-            navigate("/login");
+            setInfo("user created, Redirecting to login page...");
+
+            setTimeout(()=>{
+                navigate("/login");
+            },800);
+            
         } else{
-            console.log("unable to signup some error occured");
+            setError(result.message || "some unexpected error occured while signup");
         }
 
     }
@@ -42,6 +48,10 @@ const Signup = () => {
     return(
     <div className={styles.main}>
     <h1>Signup</h1>
+
+    {error && <p>{error}</p>}
+    {info && <p>{info}</p>}
+
     <div className={styles.container} >
 
         <form className={styles.data} onSubmit={handleSubmit}>

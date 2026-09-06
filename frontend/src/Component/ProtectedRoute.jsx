@@ -11,12 +11,7 @@ export default function ProtectedRoute({children}){
         return <h1>Loading...</h1>
     }
 
-    if(user){
-        console.log("useAuth passed",user);
-    }
-
     if(!user){
-        console.log("useAuth failed");
         return <Navigate to="/login" replace />;
     }
 

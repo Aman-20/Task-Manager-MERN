@@ -6,6 +6,9 @@ import {useAuth} from "../Context/AuthContext";
 import {API_URL} from "../../config";
 
 const Login = () => {
+    const [error, setError] = useState("");
+    const [info, setInfo] = useState("");
+
     const navigate = useNavigate();
     const {fetchAuth} = useAuth();
 
@@ -20,7 +23,6 @@ const Login = () => {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log(data);
 
         const register = await fetch(`${API_URL}/login`, {
             method:"POST",
@@ -32,17 +34,25 @@ const Login = () => {
         const result = await register.json();
 
         if(result.success){
-            console.log(result);
+            setInfo("user verified, Redirecting to home page...");
             await fetchAuth();
-            navigate("/")
+            
+            setTimeout(() => {
+                navigate("/");
+            },800);
+
         } else {
-            console.log("unable to login! Some error occured");
+            setError(result.message || "some unexpected error occured while login");
         }
     }
 
   return (
     <div className={styles.main}>
     <h1>Login</h1>
+
+    {error && <p>{error}</p>}
+    {info && <p>{info}</p>}
+
     <div className={styles.container} >
 
         <form className={styles.data} onSubmit={handleSubmit}>

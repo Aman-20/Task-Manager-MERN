@@ -9,14 +9,23 @@ const Navbar = () => {
   const {user, setUser, loading} = useAuth();
 
   const handleLogout = async(req, res)=>{
-    await fetch(`${API_URL}/logout`, {
-      credentials:"include",
-    });
-    setUser(null);
-    navigate("/login");
+    try{
+      await fetch(`${API_URL}/logout`, {
+        credentials:"include",
+      });
+
+    } catch(err){
+      console.log(err);
+      
+    } finally {
+      setUser(null);
+      navigate("/login");
+    }
   }
 
-  if(loading) return null;
+  if(loading) {
+    return <h1>Loading...</h1>
+  }
 
   return (
     <nav className={styles.navbar}>

@@ -5,6 +5,9 @@ import {API_URL} from "../../config";
 
 const AddTask = () => {
 
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
+
   const [data, setdata] = useState({
     title:"",
     desc:"",
@@ -18,7 +21,6 @@ const AddTask = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(data);
 
     let result = await fetch(`${API_URL}/task/add`, {
       method:"Post",
@@ -31,9 +33,15 @@ const AddTask = () => {
 
     const resultData = await result.json();
     
-    if(resultData){
-      console.log("Task Created Successfully!");
-      navigate("/");
+    if(resultData.success){
+      setInfo( resultData.message || "Task Created Successfully!");
+
+      setTimeout(()=>{
+        navigate("/");
+      },800);
+    
+    } else {
+      setError( resultData.message || "Unable to create task!");
     }
   }
 
@@ -41,6 +49,10 @@ const AddTask = () => {
   return (
     <div className={styles.main}>
       <h1>Add New Task</h1>
+
+      {error && <p>{error}</p>}
+      {info && <p>{info}</p>}
+
     <div className={styles.container} >
 
         <form className={styles.data} onSubmit={handleSubmit}>
@@ -52,7 +64,7 @@ const AddTask = () => {
             <textarea id='desc' name='desc' placeholder='Enter Task' rows={4} value={data.desc} onChange={handleChange}/>
              
             <div className={styles.btn}>
-            <button className={styles.submit}> Add </button>
+            <button className={styles.submit}> Add-Task </button>
             </div>
             
         </form>

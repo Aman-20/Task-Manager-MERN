@@ -12,16 +12,13 @@ const AuthProvider = ({children}) => {
                 credentials:"include"
             });
             const data = await result.json();
-
-            console.log(data);
     
             if(data.success){
                 setUser(data.user);
-                console.log("success fetched data.user", data.user);
             } else {
                 setUser(null);
-                console.log("unabale to setuser");
             }
+            
         } catch (err){
             setUser(null);
         } finally {

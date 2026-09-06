@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import {API_URL} from "../../config";
 
 const Tasklist = () => {
+    const [error, setError] = useState("");
+    const [info, setInfo] = useState("");
 
     const [data, setdata] = useState();
     const [selectTask, setselectTask] = useState([]);
@@ -15,10 +17,11 @@ const Tasklist = () => {
         });
         const listData = await list.json();
 
-        console.log(listData);
-
         if (listData.success) {
             setdata(listData.tasks);
+            setInfo(listData.message || "Task list fetched successfully!");
+        } else {
+            setError(listData.message || "unable to get Task List from mongoDB");
         }
     };
 
@@ -36,10 +39,10 @@ const Tasklist = () => {
         const task = await result.json();
 
         if(task.success){
-            console.log("SUCCESS: task deleted");
+            setInfo( task.message || "Task deleted successfully!");
             getTaskList();
         } else {
-            console.log("ERROR: task not deleted");
+            setError( task.message || "Task not deleted");
         }
     }
 
@@ -73,12 +76,13 @@ const Tasklist = () => {
                 credentials:"include",
             });
             const response = await result.json();
+
             if(response.success){
-                console.log("selected items is deleted!");
+                setInfo( response.message || "selected task is deleted")
                 setselectTask([]);
                 getTaskList();
             } else {
-                console.log("Unable to delete selected items!");
+                setError(response.message || "unable to delete selected task")
             }
         } catch(err){
             console.log(err);
@@ -89,6 +93,9 @@ const Tasklist = () => {
     return (
         <div className={styles.container}>
             <h1>Task List</h1>
+
+            {error && <p>{error}</p>}
+            {info && <p>{info}</p>}
 
             {selectTask.length > 0 && <button onClick={deleteSelected} className={styles.deleteAll}>Delete({selectTask.length})</button>}
 
