@@ -1,6 +1,6 @@
 @import "./vars.css";
 
-.App{
+.App {
     background-color: var(--color-bg);
     width: 100%;
     min-height: 100vh;
@@ -8,7 +8,7 @@
     color: white;
 }
 
-.notFound{
+.notFound {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,7 +18,30 @@
 
     font-size: 2rem;
 }
-.link{
+
+.link {
     color: rgba(0, 132, 255, 0.685);
     font-size: 1.5rem;
+}
+
+.loadingScreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.loadingText {
+    font-size: 3rem;
+    color: #666;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%,100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
 }

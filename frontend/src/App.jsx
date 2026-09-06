@@ -16,7 +16,13 @@ import {useAuth} from "./Component/Context/AuthContext";
 const App = () => {
   const {loading} = useAuth();
   if(loading) {
-    return <h1>Loading...</h1>
+    return (
+      <div className={styles.App}>
+        <div className={styles.loadingScreen}>
+          <h1 className={styles.loadingText}>Loading...</h1>
+        </div>
+      </div>
+    );
   }
 
   return (
