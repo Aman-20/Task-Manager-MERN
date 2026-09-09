@@ -24,6 +24,11 @@ const Login = () => {
     const handleSubmit = async(e)=>{
         e.preventDefault();
 
+        if(!data.email.trim() || !data.pass.trim()){
+            setError("Please fill in all fields")
+            return;
+        }
+
         const register = await fetch(`${API_URL}/login`, {
             method:"POST",
             headers:{"Content-Type":"Application/Json"},
@@ -50,8 +55,8 @@ const Login = () => {
     <div className={styles.main}>
     <h1>Login</h1>
 
-    {error && <p>{error}</p>}
-    {info && <p>{info}</p>}
+    {error && <p className={styles.error}>{error}</p>}
+    {info && <p className={styles.success}>{info}</p>}
 
     <div className={styles.container} >
 

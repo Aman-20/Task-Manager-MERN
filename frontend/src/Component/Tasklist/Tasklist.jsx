@@ -7,8 +7,11 @@ const Tasklist = () => {
     const [error, setError] = useState("");
     const [info, setInfo] = useState("");
 
-    const [data, setdata] = useState();
+    const [data, setdata] = useState([]);
     const [selectTask, setselectTask] = useState([]);
+
+    // sorting 
+    const [order, setorder] = useState("new");
 
 
     const getTaskList = async () => {
@@ -30,6 +33,34 @@ const Tasklist = () => {
         getTaskList();
     }, []);
 
+    // sort data
+    const sortData = [...data].sort((a,b)=>{
+        const dataA = new Date(a.createdAt);
+        const dataB = new Date(b.createdAt);
+        return order === "new"? dataB - dataA : dataA - dataB
+    });
+
+
+    //search function 
+    const [search , setSearch] = useState("");
+    const filterData = sortData.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase()));   
+
+    //pagination 
+    const [currpage, setcurrpage] = useState(1);
+    const itemPerPage = 5;
+
+    const totalPage = Math.ceil(filterData.length / itemPerPage);
+    const stIndex = (currpage-1) * itemPerPage;
+    const endIndex = stIndex + itemPerPage;
+
+    const currItems = filterData.slice(stIndex, endIndex);
+
+    // pagination button function
+    const goToPage = (page) => {
+        if(page < 1 || page > totalPage) return;
+        setcurrpage(page);
+    }
+
 
     const deleteTask = async(id) => {
         const result = await fetch(`${API_URL}/task/delete/${id}`, { 
@@ -49,7 +80,7 @@ const Tasklist = () => {
 
     const selectAll = (e) =>{
         if(e.target.checked){
-            const items = data.map((item)=>item._id);
+            const items = currItems.map((item)=>item._id);
             setselectTask(items);
         } else {
             setselectTask([]);
@@ -94,8 +125,21 @@ const Tasklist = () => {
         <div className={styles.container}>
             <h1>Task List</h1>
 
-            {error && <p>{error}</p>}
-            {info && <p>{info}</p>}
+            <input type='text' value={search} placeholder='Search your task' 
+            onChange={(e)=> {
+                setSearch(e.target.value); 
+                setcurrpage(1); 
+            }}/>
+
+            {error && <p className={styles.error}>{error}</p>}
+            {info && <p className={styles.success}>{info}</p>}
+
+
+            <select className={styles.select} value={order} onChange={(e)=>setorder(e.target.value)}>
+                <option value="new">Newest</option>
+                <option value="old">Oldest</option>
+            </select>
+
 
             {selectTask.length > 0 && <button onClick={deleteSelected} className={styles.deleteAll}>Delete({selectTask.length})</button>}
 
@@ -111,11 +155,16 @@ const Tasklist = () => {
                 </thead>
 
                 <tbody>
-                {data && data.map((val, idx) => {
+                {currItems.length === 0? (
+                  <tr>
+                    <td colSpan={5} style={{ textAlign: "center", height:"50px"}}>No match found</td>
+                  </tr>
+                ) : 
+                (currItems.map((val, idx) => {
                     return (
                         <tr key={idx}>
                             <td> <input type='checkbox' onChange={()=>{selectSingle(val._id)}} checked={selectTask.includes(val._id)}/> </td>
-                            <td> {idx + 1} </td>
+                            <td> {stIndex + idx + 1} </td>
                             <td> {val.title}  </td>
                             <td> {val.desc} </td>
                             <td>
@@ -126,10 +175,18 @@ const Tasklist = () => {
                             </td>
                         </tr>
                     );
-                })}
+                })
+            )}
                 </tbody>
 
             </table>
+
+            <div className={styles.page}>
+            <button className={styles.submit} onClick={()=>goToPage(currpage-1)} disabled={currpage === 1}>Prev</button>
+            <h3> {currpage} of {totalPage} </h3>
+            <button className={styles.submit} onClick={()=>goToPage(currpage+1)} disabled={currpage === totalPage}>Next</button>
+            </div>
+
         </div>
     )
 }

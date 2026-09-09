@@ -1,6 +1,6 @@
 @import "../../vars.css";
 
-.main{
+.main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,10 +10,10 @@
     margin-top: 50px;
 }
 
-.container{
+.container {
     width: 50%;
- 
-    margin: 10px 5px 10px 5px ;
+
+    margin: 10px 5px 10px 5px;
     padding: 10px;
 
     background-color: #f2f2f220;
@@ -23,41 +23,43 @@
     box-shadow: 2px 4px 5px black, -2px -4px 5px black;
 }
 
-label{
+label {
     font-weight: 600;
     display: block;
     color: white;
     margin: 8px;
 }
 
-h1{
+h1 {
     text-align: center;
     color: white;
     margin-bottom: 5px;
 }
 
-input, textarea{
+input,
+textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 15px;
-    font-size: 16px;   
+    font-size: 16px;
 
     background-color: rgba(245, 245, 245, 0.850);
 }
 
-input:hover, textarea:hover{
+input:hover,
+textarea:hover {
     border: 2px solid #ccc;
 }
 
-.btn{
+.btn {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.submit{
+.submit {
     width: 50%;
     padding: 12px;
 
@@ -73,11 +75,19 @@ input:hover, textarea:hover{
     font-weight: bold;
 }
 
-.submit:hover{
+.submit:hover {
     border: 1px solid;
 }
 
-.link{
+.link {
     color: rgba(0, 132, 255, 0.685);
     font-size: 1.5rem;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: white;
 }

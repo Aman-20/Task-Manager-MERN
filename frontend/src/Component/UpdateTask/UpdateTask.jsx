@@ -67,12 +67,12 @@ const UpdateTask = () => {
 
     return (
         <div className={styles.main}>
+            <h1>Update Task</h1>
+
+            {error && <p className={styles.error}>{error}</p>}
+            {info && <p className={styles.success}>{info}</p>}
+
             <div className={styles.container} >
-
-                <h1>Update Task</h1>
-
-                {error && <p>{error}</p>}
-                {info && <p>{info}</p>}
 
                 <form className={styles.data} onSubmit={handleUpdate}>
 

@@ -22,6 +22,11 @@ const AddTask = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
 
+    if(!data.title.trim() || !data.desc.trim()){
+      setError("Please fill in all fields");
+      return;
+    }
+
     let result = await fetch(`${API_URL}/task/add`, {
       method:"Post",
       body:JSON.stringify(data),
@@ -50,8 +55,8 @@ const AddTask = () => {
     <div className={styles.main}>
       <h1>Add New Task</h1>
 
-      {error && <p>{error}</p>}
-      {info && <p>{info}</p>}
+      {error && <p className={styles.error}>{error}</p>}
+      {info && <p className={styles.success}>{info}</p>}
 
     <div className={styles.container} >
 
