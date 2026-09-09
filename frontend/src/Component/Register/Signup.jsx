@@ -71,7 +71,7 @@ const Signup = () => {
             <input type='password' id='pass' name='pass' placeholder='Enter Your Password' value={data.pass} onChange={handleChange}/>
              
             <div className={styles.btn}>
-            <button className={styles.submit}> Add </button>
+            <button className={styles.submit}> Register </button>
             </div>
 
             <Link to="/login" className={styles.link}>Login</Link>

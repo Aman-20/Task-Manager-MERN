@@ -2,6 +2,7 @@ const { User } = require("../model/user");
 const { createHashPass, checkHashPass } = require("../service/hashPass");
 const { setUser, getUser } = require("../service/jwt");
 
+const {Task} = require("../model/task")
 
 async function handleUserSignup(req, res) {
     try {
@@ -18,6 +19,11 @@ async function handleUserSignup(req, res) {
             email,
             pass: hash,
         });
+
+        // add some demo tasks for the new user
+        await Task.create({ title: "Add a new task", desc: "Click 'Add Task' to create your own.", createdBy: result._id });
+        await Task.create({ title: "Delete a task", desc: "Try deleting this one when you're ready.", createdBy: result._id });
+        await Task.create({ title: "Welcome!", desc: "This is your first task. Try editing or deleting it.", createdBy: result._id });
 
         return res.status(201).json({ success: true, message: "user created successfully", result });
 

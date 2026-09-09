@@ -1,21 +1,26 @@
-:root{
-    /*color*/
-    --color-text: #fff;
-    --color-primary: #576cbc;
-    --color-secondary: #19376d;
-    --color-dark: #0b2447;
-    --color-bg: #04152d;
+:root {
+    --bg: #14161a;
+    --surface: #1b1e24;
+    --surface-2: #22262d;
+    --border: #34383f;
+    --text: #ece9e4;
+    --text-muted: #8b8f96;
 
-    /*fonts*/
-    --font-robot: "Roboto";
+    --accent: #2fa79b;
+    --accent-dark: #248f85;
+    --accent-contrast: #0b1211;
 
-    /* other */
-    --bg: #0F172A;
-    --bg-soft: #141F38;
-    --card: #16213E;
-    --line: #263252;
-    --ink: #F4F5F7;
-    --ink-dim: #A6AEC4;
-    --blue: #4160dd;
-    --amber: #F5B841;
+    --success: #d1a53d;
+    --success-bg: rgba(209, 165, 61, 0.1);
+
+    --danger: #c96650;
+    --danger-bg: rgba(201, 102, 80, 0.12);
+
+    --radius: 3px;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    --color-bg: var(--bg);
+    --color-primary: var(--accent);
 }

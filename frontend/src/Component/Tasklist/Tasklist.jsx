@@ -125,7 +125,7 @@ const Tasklist = () => {
         <div className={styles.container}>
             <h1>Task List</h1>
 
-            <input type='text' value={search} placeholder='Search your task' 
+            <input type='text' value={search} placeholder='🔎 Search your task' 
             onChange={(e)=> {
                 setSearch(e.target.value); 
                 setcurrpage(1); 
@@ -157,7 +157,7 @@ const Tasklist = () => {
                 <tbody>
                 {currItems.length === 0? (
                   <tr>
-                    <td colSpan={5} style={{ textAlign: "center", height:"50px"}}>No match found</td>
+                    <td colSpan={5} style={{ textAlign: "center", height:"50px"}}>No Task Here!</td>
                   </tr>
                 ) : 
                 (currItems.map((val, idx) => {

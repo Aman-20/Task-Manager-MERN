@@ -1,126 +1,263 @@
 @import "../../vars.css";
 
 .container {
-    max-width: 700px;
-    margin: 30px auto;
-    padding: 15px;
+    max-width: 880px;
+    margin: 40px auto;
+    padding: 0 20px 60px;
 }
 
 .container h1 {
-    color: white;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+}
+
+.container input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+}
+
+.container input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.select {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.select option {
+    background: var(--surface-2);
+}
+
+.deleteAll {
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    padding: 0 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--danger);
+    background: var(--danger-bg);
+    border: 1px solid var(--danger);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.deleteAll:hover {
+    background: var(--danger);
+    color: var(--bg);
 }
 
 .container table {
     width: 100%;
-    /* border-collapse: collapse; */
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
 }
 
 .container th,
 .container td {
-    border: 1px solid #ddd;
-    padding: 8px 12px;
+    padding: 10px 12px;
     text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.container td:nth-child(4) {
+    white-space: normal;
 }
 
 .container th {
-    background-color: #f2f2f257;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--surface-2);
 }
 
-.container td {
-    background-color: #f2f2f220;
+.container th:nth-child(1),
+.container td:nth-child(1) {
+    width: 42px;
+    text-align: center;
+}
+
+.container th:nth-child(2),
+.container td:nth-child(2) {
+    width: 56px;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+}
+
+.container th:nth-child(3),
+.container td:nth-child(3) {
+    width: 22%;
+    font-weight: 600;
+}
+
+.container th:nth-child(4),
+.container td:nth-child(4) {
+    width: auto;
+    color: var(--text-muted);
+}
+
+.container th:nth-child(5),
+.container td:nth-child(5) {
+    width: 150px;
+}
+
+.container tbody tr:hover {
+    background: var(--surface);
 }
 
 .btns {
     display: flex;
-    flex-direction: row;
-    gap: 2px;
-    justify-content: center;
-    align-items: center;
-    height: 100%
+    gap: 6px;
 }
 
 .delete,
-.deleteAll {
-    background-color: rgba(255, 0, 0, 0.9);
-
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
+.update {
+    flex: 1;
+    padding: 6px 0;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    border-radius: var(--radius);
+    border: 1px solid;
     cursor: pointer;
-    font-weight: bold;
-    color: white;
-    padding: 6px 0px;
-    margin: 3px;
+    transition: background 0.15s, color 0.15s;
 }
 
-.deleteAll {
-    max-width: 5rem;
+.delete {
+    color: var(--danger);
+    background: transparent;
+    border-color: var(--danger);
+}
+
+.delete:hover {
+    background: var(--danger);
+    color: var(--bg);
 }
 
 .update {
-    background-color: rgba(0, 128, 0, 0.9);
+    color: var(--success);
+    background: transparent;
+    border-color: var(--success);
+}
 
-    width: 100%;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    padding: 6px 0px;
-    text-decoration: none;
-    margin: 3px;
-    text-align: center;
+.update:hover {
+    background: var(--success);
+    color: var(--bg);
 }
 
 .page {
-    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 24px;
+}
 
-    gap: 1rem;
+.page h3 {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
 }
 
 .submit {
-    padding: 6px 12px;
-
-
-    background-color: var(--color-bg);
-    color: var(--color-primary);
-
-    border-radius: 15px;
-    border: 1px solid;
-
+    padding: 7px 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-contrast);
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius);
     cursor: pointer;
-    font-size: 1.1rem;
-
-    font-weight: bold;
+    transition: background 0.15s;
 }
 
-.submit:hover {
-    box-shadow: -3px -3px 5px black;
+.submit:hover:not(:disabled) {
+    background: var(--accent-dark);
 }
 
-
-.select {
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
+.submit:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
 }
 
-.select option {
-    padding: 10px;
+.error,
+.success {
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    border-left: 2px solid;
 }
 
 .error {
-    color: red;
+    background: var(--danger-bg);
+    border-color: var(--danger);
+    color: var(--danger);
 }
 
 .success {
-    color: white;
+    background: var(--success-bg);
+    border-color: var(--success);
+    color: var(--success);
+}
+
+@media (max-width: 640px) {
+    .container {
+        margin: 20px auto;
+        padding: 0 14px 40px;
+    }
+
+    .container th,
+    .container td {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+    .container th:nth-child(4),
+    .container td:nth-child(4) {
+        display: none;
+    }
+
+    .container th:nth-child(3),
+    .container td:nth-child(3) {
+        width: auto;
+    }
+
+    .container th:nth-child(5),
+    .container td:nth-child(5) {
+        width: 110px;
+    }
 }

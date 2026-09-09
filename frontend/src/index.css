@@ -1,6 +1,23 @@
+@import "./vars.css";
+
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 0px;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
 }
