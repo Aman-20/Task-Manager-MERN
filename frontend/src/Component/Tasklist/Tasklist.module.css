@@ -236,28 +236,19 @@
 
 @media (max-width: 640px) {
     .container {
-        margin: 20px auto;
-        padding: 0 14px 40px;
+      margin: 20px auto;
+      padding: 0 14px 40px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
-
+  
+    .container table {
+      min-width: 560px;
+    }
+  
     .container th,
     .container td {
-        padding: 8px;
-        font-size: 0.8rem;
+      padding: 8px;
+      font-size: 0.8rem;
     }
-
-    .container th:nth-child(4),
-    .container td:nth-child(4) {
-        display: none;
-    }
-
-    .container th:nth-child(3),
-    .container td:nth-child(3) {
-        width: auto;
-    }
-
-    .container th:nth-child(5),
-    .container td:nth-child(5) {
-        width: 110px;
-    }
-}
+  }
